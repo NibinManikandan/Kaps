@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<style>
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  div {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+  }
+
+  .happiness-club-container {
+    padding: 50px 20px;
+    background: white;
+  }
+
+  .happiness-club-container h2 {
+    font-size: 34px;
+    margin-bottom: 40px;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .happiness-club-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 1366px) and (min-width: 1024px) {
+    .happiness-club-section {
+      grid-template-columns: repeat(2, 1fr);
+      margin: 0;
+      margin-left:45px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) and (min-width: 820px) {
+    .happiness-club-section {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 819px) and (min-width: 768px) {
+    .happiness-club-section {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .happiness-club-container h2 {
+      font-size: 26px;
+    }
+    .happiness-club-section {
+      grid-template-columns: 1fr;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 60%;
+      margin: 0 auto;
+    }
+
+    .testimonial-card-img-top {
+      width: 100%;
+      height: 210px;
+    }
+
+    .testimonial-card-text {
+      font-size: 22px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .owner-name {
+      font-size: 19px;
+    }
+
+    .owner-info {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .card {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  .card {
+    width: 100%;
+    max-width: 380px;
+    height: 510px;
+    background: white;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 320px) {
+    .happiness-club-container h2 {
+      font-size: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 350px;
+      height: 450px;
+    }
+  }
+
+  .testimonial-card-img-top {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+  }
+
+  .testimonial-card-body {
+    padding: 20px;
+    text-align: start;
+  }
+
+  .owner-name {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 32.78px;
+    margin: 10px 0 5px;
+  }
+
+  .owner-info {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 24.59px;
+    margin: 5px 0;
+  }
+
+  .testimonial-card-text {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 5px 0;
+    color: #555;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+</style>
+
+<div class="happiness-club-container">
+  <h2 class="text-center mb-5 mt-0">Happiness Club</h2>
+  <div class="happiness-club-section">
+    {% for member in happiness_club_members %}
+    <div class="card">
+      {% if member.owner_image %}
+      <img class="testimonial-card-img-top" src="{{ member.owner_image.url }}" alt="Card image cap" />
+      {% else %}
+      <img class="testimonial-card-img-top" src="{% static 'images/hclub_profile.jpg' %}" alt="{{ member.owner_name }}" />
+      {% endif %}
+      <div class="testimonial-card-body">
+        <h3 class="owner-name">{{ member.owner_name }}</h3>
+        <p class="owner-info">{{ member.owner_info }}</p>
+        <p class="testimonial-card-text">{{ member.testimonial }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

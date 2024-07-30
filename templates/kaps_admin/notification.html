@@ -1,0 +1,56 @@
+{% extends 'kaps_admin/admin_base.html' %}
+{% block content %}
+<style>
+      .careers-section h2{
+        margin-left: 23%;
+      }
+  @media (max-width: 768px) {
+    .careers-section h2{
+      text-align: start;
+      margin-left: 0;
+    }
+  }
+  
+  .job-card .badge {
+    margin-left: auto;
+  }
+  
+</style>
+
+<div class="careers-section">
+  <div class="job-listing">
+    {% if notifications %}
+      {% for notify in notifications %}
+        <div class="job-card">
+          <div class="job-info">
+            <h3 class="fw-500">{{ notify.user_data.name }}</h3>
+            <p class="experience fw-400">Car name: {{ notify.car_data.model_name }}</p>
+            <p class="posted-date fw-400" style="text-align: left;">Received on {{ notify.created_at|date:"d/m/Y" }}</p>
+            <div class="footer-careers">
+                <p class="location fw-400">{{ notify.user_data.mobile }}</p>
+                <p class="posted-date fw-400">{% if notify.is_test %}
+                  Requested for Test Drive
+                  {% else %}
+                  Requested for Booking
+                  {% endif %}
+                </p>
+            </div>
+          </div>
+          {% if notify.is_test %}
+              <a class="badge btn btn-warning" href="{% url 'dele_notification' 0 notify.id %}" style="color: red; text-decoration: none;">
+                  <i class="fa-solid fa-trash-can"></i>
+              </a>
+          {% else %}
+              <a class="badge btn btn-warning" href="{% url 'dele_notification' 1 notify.id %}" style="color: red; text-decoration: none;">
+                  <i class="fa-solid fa-trash-can"></i>
+              </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align: center; margin-top: 170px;margin-bottom: 170px; font-weight: 700;">There are no notifications available at the moment.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

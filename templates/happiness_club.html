@@ -44,7 +44,7 @@
     .happiness-club-section {
       grid-template-columns: repeat(2, 1fr);
       margin: 0;
-      margin-left:45px;
+      margin-left: 45px;
     }
   }
 
@@ -108,7 +108,7 @@
   .card {
     width: 100%;
     max-width: 380px;
-    height: 510px;
+    height: 380px; /* Adjusted height to match the image */
     background: white;
     border: 1px solid #000000;
     border-radius: 10px;
@@ -116,6 +116,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    overflow: hidden; /* Ensure no overflow */
+  }
+
+  .testimonial-card-img-top {
+    width: 100%;
+    height: 100%; /* Ensures image takes up the full height of the card */
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+  }
+
+  .card-text-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+
+  .card-text-container h2,
+  .card-text-container p {
+    margin: 0;
+  }
+
+  .card-text-container h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .card-text-container p {
+    font-size: 12px;
   }
 
   @media screen and (max-width: 320px) {
@@ -125,43 +160,16 @@
     .card {
       width: 100%;
       max-width: 350px;
-      height: 450px;
+      height: 200px; /* Adjusted height for smaller screens */
     }
-  }
 
-  .testimonial-card-img-top {
-    width: 100%;
-    height: 250px;
-    border-radius: 10px 10px 0 0;
-    object-fit: cover;
-  }
+    .card-text-container h2 {
+      font-size: 14px;
+    }
 
-  .testimonial-card-body {
-    padding: 20px;
-    text-align: start;
-  }
-
-  .owner-name {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 32.78px;
-    margin: 10px 0 5px;
-  }
-
-  .owner-info {
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 24.59px;
-    margin: 5px 0;
-  }
-
-  .testimonial-card-text {
-    font-size: 14px;
-    font-weight: 400;
-    margin: 5px 0;
-    color: #555;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    .card-text-container p {
+      font-size: 10px;
+    }
   }
 
 </style>
@@ -171,15 +179,11 @@
   <div class="happiness-club-section">
     {% for member in happiness_club_members %}
     <div class="card">
-      {% if member.owner_image %}
       <img class="testimonial-card-img-top" src="{{ member.owner_image.url }}" alt="Card image cap" />
-      {% else %}
-      <img class="testimonial-card-img-top" src="{% static 'images/hclub_profile.jpg' %}" alt="{{ member.owner_name }}" />
-      {% endif %}
-      <div class="testimonial-card-body">
-        <h3 class="owner-name">{{ member.owner_name }}</h3>
-        <p class="owner-info">{{ member.owner_info }}</p>
-        <p class="testimonial-card-text">{{ member.testimonial }}</p>
+      <div class="card-text-container">
+        <h2>{{ member.owner_name }}</h2>
+        <p>{{ member.owner_info }}</p>
+        <p>{{ member.testimonial }}</p>
       </div>
     </div>
     {% endfor %}

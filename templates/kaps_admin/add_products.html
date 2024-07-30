@@ -5,17 +5,30 @@
 <main id="main" class="main">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Add a new Product to the database</h5>
+            <h5 class="card-title">Add a new Car</h5>
             <form method="post" enctype="multipart/form-data" id="add-product-form">
                 {% csrf_token %}
                 <div class="row mb-3">
                     <label for="id_name" class="col-sm-2 col-form-label">Brand name</label>
                     <select id="brand" name="brand" class="form-control" required>
-                        {% comment %} <option value="">Brand name</option> {% endcomment %}
                         {% for brand in Brand_choices %}
                         <option value="{{ brand }}">{{ brand }}</option>
                         {% endfor %}
                       </select>
+                </div>
+                <div class="row mb-3">
+                    <label for="id_name" class="col-sm-2 col-form-label">Colour</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="colour" id="id_name" class="form-control">
+                        <div class="text-danger error-message" id="name-error"></div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="id_name" class="col-sm-2 col-form-label">Variant</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="variant" id="id_name" class="form-control">
+                        <div class="text-danger error-message" id="name-error"></div>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <label for="id_name" class="col-sm-2 col-form-label">Model name</label>

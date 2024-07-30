@@ -196,6 +196,9 @@ def add_product(request):
     if request.method == 'POST':
         Car_name = request.POST.get('brand')
         Car_model_name = request.POST.get('model_name')
+        model = request.POST.get('model')
+        variant = request.POST.get('variant')
+        colour = request.POST.get('colour')
         Car_price = request.POST.get('price')
         Car_milage = request.POST.get('milage')
         Car_description = request.POST.get('description')
@@ -224,6 +227,9 @@ def add_product(request):
         product = Cars(
             brand=brand_obj,
             model_name=Car_model_name,
+            model=model,
+            colour=colour,
+            variant=variant,
             price=Car_price,
             mileage=Car_milage,
             transmission=transmission_obj,

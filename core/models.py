@@ -46,6 +46,8 @@ class Cars(models.Model):
     brand = models.ForeignKey(Brand, null=False, on_delete=models.CASCADE, related_name='car_brand')
     fuel = models.ForeignKey(Fuel_type, null=False, on_delete=models.CASCADE, related_name='fueltype')
     model_name = models.CharField(max_length=50, blank=False, null=False)
+    colour = models.CharField(max_length=20, blank=True, null=True)
+    variant = models.CharField(max_length=20, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     mileage = models.IntegerField()
     description = models.TextField(blank=True)

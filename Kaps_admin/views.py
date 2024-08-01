@@ -50,22 +50,12 @@ def pro_management(request):
 def crm(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            #crm details
+            # CRM details
             seller_name = request.POST.get('seller')
             phone_num = request.POST.get('phone')
             email = request.POST.get('email')
             address = request.POST.get('address')
             staff_name = request.POST.get('staff')
-
-            #sell car
-            car_reg_number = request.POST.get('car_reg_number')
-            car_brand = request.POST.get('car_brand')
-            car_model = request.POST.get('car_model')
-            registered_year = request.POST.get('registered_year')
-            fuel_type = request.POST.get('fuel_type')
-            km_driven = request.POST.get('km_driven')
-            selling_price = request.POST.get('selling_price')
-            images = request.FILES.get('images')
 
             crm_obj = Crm_Profile(
                 seller_name=seller_name,
@@ -74,25 +64,10 @@ def crm(request):
                 address=address,
                 staff_name=staff_name
             )
-
             crm_obj.save()
 
-            brand = Brand.objects.get(Available_brands=car_brand)
-            fuel = Fuel_type.objects.get(Available_fuel_type=fuel_type)
-            sell=SellYourCar(
-                car_reg_number=car_reg_number,
-                brand_name=brand,
-                car_model=car_model,
-                registered_year=registered_year,
-                fuel_type=fuel,
-                km_driven=km_driven,
-                selling_price=selling_price,
-                images=images,
-                proposed_user = None,
-                proposed_staff = crm_obj
-            )
-
-            sell.save()
+            # Redirect to the same page to fill the car selling form
+            return redirect('crm')
 
         car_brands = Brand.objects.all().distinct()
         car_fuel_types = Fuel_type.objects.all().distinct()
@@ -102,6 +77,53 @@ def crm(request):
             'car_fuel_types': car_fuel_types,
         }
         return render(request, 'kaps_admin/crm.html', context)
+    else:
+        return redirect('Kaps_admin')
+
+
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@user_passes_test(lambda u: u.is_superuser, login_url='Kaps_admin')
+def sell_car(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            # Sell car details
+            car_reg_number = request.POST.get('car_reg_number')
+            car_brand = request.POST.get('car_brand')
+            car_model = request.POST.get('car_model')
+            registered_year = request.POST.get('registered_year')
+            fuel_type = request.POST.get('fuel_type')
+            km_driven = request.POST.get('km_driven')
+            selling_price = request.POST.get('selling_price')
+            images = request.FILES.get('images')
+
+            crm_obj = Crm_Profile.objects.latest('id')
+            brand = Brand.objects.get(Available_brands=car_brand)
+            fuel = Fuel_type.objects.get(Available_fuel_type=fuel_type)
+            sell = SellYourCar(
+                car_reg_number=car_reg_number,
+                brand_name=brand,
+                car_model=car_model,
+                registered_year=registered_year,
+                fuel_type=fuel,
+                km_driven=km_driven,
+                selling_price=selling_price,
+                images=images,
+                proposed_user=None,
+                proposed_staff=crm_obj
+            )
+            sell.save()
+
+            return redirect('crm')
+
+        car_brands = Brand.objects.all().distinct()
+        car_fuel_types = Fuel_type.objects.all().distinct()
+
+        context = {
+            'car_brands': car_brands,
+            'car_fuel_types': car_fuel_types,
+        }
+        return render(request, 'kaps_admin/sell_car.html', context)
     else:
         return redirect('Kaps_admin')
 
@@ -227,7 +249,6 @@ def add_product(request):
         product = Cars(
             brand=brand_obj,
             model_name=Car_model_name,
-            model=model,
             colour=colour,
             variant=variant,
             price=Car_price,
@@ -265,7 +286,6 @@ def add_product(request):
         'transmission_choices':transmission_choices,
         'fuel_choices':fuel_choices
     }
-
 
     return render(request, 'kaps_admin/add_products.html', context)
 

@@ -118,7 +118,7 @@ def otp_verification(request):
             user_obj.save()
             request.session['is_logged_in'] = True
             login(request, user)
-            return redirect('collections')
+            return redirect('home')
         else:
             messages.error(request, 'Invalid OTP. Please try again.')
     
@@ -182,7 +182,7 @@ def find_a_car(request):
             'transmission_types': transmission_types
         }
 
-        return render(request, 'index.html', context)
+        return render(request, 'find_car.html', context)
     else:
         return redirect('login')
 
@@ -293,6 +293,8 @@ def sell_a_car(request):
 
             sell.save()
 
+            return redirect('proposal_success')
+
         car_brands = Brand.objects.all().distinct()
         car_fuel_types = Fuel_type.objects.all().distinct()
 
@@ -324,6 +326,8 @@ def happiness_club_view(request):
 def careers(request):
     careers = Career.objects.all()
     return render(request, 'careers.html', {'careers': careers})
+
+    
 
 
 #kaps assured 

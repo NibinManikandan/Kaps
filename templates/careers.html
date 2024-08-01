@@ -38,7 +38,7 @@
   .job-card {
     width: 100%;
     max-width: 1050px;
-    height: 146px;
+    height: 180px;
     background-color: #FFFFFF;
     border-radius: 10px;
     box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.25);
@@ -121,13 +121,14 @@
 <div class="careers-section">
   <h2 style="text-align: left;">Careers</h2>
   <div class="job-listing">
-    {% if notifications %}
+    {% if careers %}
       {% for career in careers %}
         <div class="job-card">
           <h3 class="fw-500">{{ career.job_title }}</h3>
           <p class="experience fw-400">Experience: {{ career.experience }}</p>
+          <p class="experience fw-400">Experience: {{ career.description }}</p>
           <div class="footer-careers">
-              <p class="location fw-400">{{ career.location }}</p>
+              <p class="location fw-400">Location: {{ career.location }}</p>
               <p class="posted-date fw-400">Posted on {{ career.date_posted|date:"d/m/Y" }}</p>
           </div>
         </div>

@@ -5,12 +5,11 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
-#'django-insecure-@iayoh4jpcw*u)b!(u&%eqf2v^8ddi35y3l-+3y5o0&$5ogh7q'
+SECRET_KEY = 'django-insecure-@iayoh4jpcw*u)b!(u&%eqf2v^8ddi35y3l-+3y5o0&$5ogh7q'
 
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = 'login'
 
@@ -24,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'billing',
     'rest_framework',
     'Kaps_admin',
 ]
@@ -79,8 +77,6 @@ DATABASES = {
     }
 }
 
-database_url = os.environ.get("DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse(database_url)
 
 
 

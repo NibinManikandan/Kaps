@@ -5,6 +5,7 @@ urlpatterns = [
     path('Kaps_admin/', views.Kaps_admin, name='Kaps_admin'),
     path('pro_management/', views.pro_management, name='pro_management'),
     path('crm/', views.crm, name='crm'),
+    path('sell_car/', views.sell_car, name='sell_car'),
     path('users/', views.users, name='users'),
     path('delete_user/<str:id>/', views.delete_user, name='delete_user'),
     path('proposal/', views.proposal, name='proposal'),

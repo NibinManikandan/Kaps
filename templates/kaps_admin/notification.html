@@ -1,18 +1,75 @@
 {% extends 'kaps_admin/admin_base.html' %}
 {% block content %}
+
 <style>
-      .careers-section h2{
-        margin-left: 23%;
-      }
-  @media (max-width: 768px) {
-    .careers-section h2{
-      text-align: start;
-      margin-left: 0;
+  .careers-section {
+    padding: 20px;
+  }
+  
+  .job-listing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .job-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 100%%;
+  }
+  
+  .job-info {
+    flex-grow: 1;
+  }
+  
+  .job-info h3 {
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+  
+  .job-info p {
+    margin: 5px 0;
+  }
+  
+  .footer-careers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .badge {
+    align-self: flex-start;
+    text-decoration: none;
+    color: white;
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .no-notifications {
+    text-align: center;
+    margin: 170px 0;
+    font-weight: 700;
+  }
+  
+  @media (max-width: 1024px) {
+    .job-card {
+      flex: 1 1 calc(50% - 20px);
     }
   }
   
-  .job-card .badge {
-    margin-left: auto;
+  @media (max-width: 768px) {
+    .job-card {
+      flex: 1 1 100%;
+    }
   }
   
 </style>
@@ -23,32 +80,27 @@
       {% for notify in notifications %}
         <div class="job-card">
           <div class="job-info">
-            <h3 class="fw-500">{{ notify.user_data.name }}</h3>
-            <p class="experience fw-400">Car name: {{ notify.car_data.model_name }}</p>
-            <p class="posted-date fw-400" style="text-align: left;">Received on {{ notify.created_at|date:"d/m/Y" }}</p>
+            <p class="posted-date fw-400" style="text-align: left;">"Hi, you have a new {% if notify.is_test %}
+              request for Test Drive
+              {% else %}
+              request for Booking
+              {% endif %} from {{ notify.user_data.name }}. Car Name: {{ notify.car_data.model_name }}, Contact: {{ notify.user_data.mobile }}. Received on: {{ notify.created_at|date:"d/m/Y" }}."</p>
             <div class="footer-careers">
-                <p class="location fw-400">{{ notify.user_data.mobile }}</p>
-                <p class="posted-date fw-400">{% if notify.is_test %}
-                  Requested for Test Drive
-                  {% else %}
-                  Requested for Booking
-                  {% endif %}
-                </p>
             </div>
           </div>
           {% if notify.is_test %}
-              <a class="badge btn btn-warning" href="{% url 'dele_notification' 0 notify.id %}" style="color: red; text-decoration: none;">
-                  <i class="fa-solid fa-trash-can"></i>
+              <a href="{% url 'dele_notification' 0 notify.id %}" style="color: red; text-decoration: none;">
+                  <i class="fas fa-trash-alt"></i> <!-- Use 'fas' and 'fa-trash-alt' for solid trash icon -->
               </a>
           {% else %}
-              <a class="badge btn btn-warning" href="{% url 'dele_notification' 1 notify.id %}" style="color: red; text-decoration: none;">
-                  <i class="fa-solid fa-trash-can"></i>
+              <a href="{% url 'dele_notification' 1 notify.id %}" style="color: red; text-decoration: none;">
+                  <i class="fas fa-trash-alt"></i> <!-- Use 'fas' and 'fa-trash-alt' for solid trash icon -->
               </a>
           {% endif %}
         </div>
       {% endfor %}
     {% else %}
-      <p style="text-align: center; margin-top: 170px;margin-bottom: 170px; font-weight: 700;">There are no notifications available at the moment.</p>
+      <p class="no-notifications">There are no notifications available at the moment.</p>
     {% endif %}
   </div>
 </div>

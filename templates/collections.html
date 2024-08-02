@@ -392,6 +392,19 @@ ul li a {
             background-color:white ;
             color: #104545;
         }
+        .fin-car-btn {
+            padding: 15px 25px;
+            background-color: #0A6847;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-left: 0;
+            display: block;
+            max-width: 200px;
+            margin-top: 63%;
+        }
 
 </style>
 
@@ -462,7 +475,7 @@ ul li a {
 
                     <!-- Apply Button -->
                     <div class="button-container">
-                        <button type="submit" class="find-car-btn">Apply</button>
+                        <button type="submit" class="fin-car-btn">Apply</button>
                       </div>
                 </form>
             </div>
@@ -490,7 +503,7 @@ ul li a {
                     </p>
                     <p class="card-text">Model: {{ car.reg_year }}</p>
                     <p class="card-text">Fuel type: {{ car.fuel.Available_fuel_type }}</p>
-                    <a href="{% url 'car_details' car.id %}" class="download-btn"> View more info</a>
+                    <a href="{% url 'car_details' car.id %}" class="download-btn"> View full report</a>
                 </div>
             </div>
         {% endfor %}
@@ -533,6 +546,14 @@ ul li a {
     </form>
 </div>
 
+
+<style>
+    .car-card img {
+        height: 380px; /* Set your desired fixed height */
+        width: 100%; /* Maintain aspect ratio */
+        object-fit: cover; /* Ensure the image covers the area without stretching */
+    }
+</style>
 
 
 <script>

@@ -92,12 +92,14 @@ def user_login(request):
     
     return render(request, 'login.html')
 
+
+from django.urls import reverse
 def otp_verification(request):
     if request.method == 'POST':
-        otp_1 = request.POST['otp_1']
-        otp_2 = request.POST['otp_2']
-        otp_3 = request.POST['otp_3']
-        otp_4 = request.POST['otp_4']
+        otp_1 = request.POST.get('otp_1')
+        otp_2 = request.POST.get('otp_2')
+        otp_3 = request.POST.get('otp_3')
+        otp_4 = request.POST.get('otp_4')
         entered_otp = otp_1 + otp_2 + otp_3 + otp_4
 
         user_data = request.session.get('user_data')
@@ -108,22 +110,47 @@ def otp_verification(request):
         print(f"Entered OTP: {entered_otp}, Stored OTP: {stored_otp}")
         
         if entered_otp == stored_otp:
-            # Use Django's default User model for login
             user, created = User.objects.get_or_create(
                 username=user_data['email'],
                 defaults={'email': user_data['email'], 'first_name': user_data['name'], 'last_name': ''},
             )
             
-            user_obj=UserLogin.objects.get(email =user_data['email'])
-            user_obj.is_active=True
+            user_obj = UserLogin.objects.get(email=user_data['email'])
+            user_obj.is_active = True
             user_obj.save()
             request.session['is_logged_in'] = True
             login(request, user)
+            
+            # Debug statements to check session keys
+            sell_car_key = request.session.get('sell_car_key')
+            find_car_key = request.session.get('find_car_key')
+            
+            
+            
+            if sell_car_key:
+                del request.session['sell_car_key']
+                return redirect(sell_car_key)
+            
+            if find_car_key:
+                del request.session['find_car_key']
+                return redirect(find_car_key)
+            
+            if 'car_details_view' in request.session and 'car_details_id' in request.session:
+                view_name = request.session['car_details_view']
+                car_id = request.session['car_details_id']
+                car_details_url = reverse(view_name, kwargs={'id': car_id})
+                del request.session['car_details_view']
+                del request.session['car_details_id']
+
+                return redirect(car_details_url)
+            
             return redirect('home')
         else:
             messages.error(request, 'Invalid OTP. Please try again.')
     
     return render(request, 'otp.html')
+
+
 
 # logout
 def logout(request):
@@ -138,8 +165,14 @@ def home(request):
 
 
 
+def futured_cars(request, id):
+        cars = Cars.objects.get(id=int(id))
+        return render(request, 'car_details.html', {'cars':cars})
+    
+
+
+
 # find Your Car Form Submission
-@login_required
 def find_a_car(request):
     if request.user.is_authenticated:
         fuel_choices = Fuel_type.objects.all().distinct()
@@ -156,7 +189,7 @@ def find_a_car(request):
                 '30+': (3000000, float('inf'))
             }
 
-            if budget!='30+':
+            if budget != '30+':
                 if budget in budget_ranges:
                     budget_min, budget_max = budget_ranges[budget]
                     filtered_cars = Cars.objects.filter(
@@ -172,11 +205,9 @@ def find_a_car(request):
                     fuel__Available_fuel_type=fuel_type,
                     transmission__Transmission_type=transmission,
                     price__gte=3000000,
-                    
                 )
 
-            
-            return render(request,'collections.html',{'cars':filtered_cars})
+            return render(request, 'collections.html', {'cars':filtered_cars})
 
         context = {
             'fuel_choices': fuel_choices,
@@ -185,6 +216,8 @@ def find_a_car(request):
 
         return render(request, 'find_car.html', context)
     else:
+        request.session['find_car_key'] = 'find_a_car'
+        
         return redirect('login')
 
 
@@ -213,11 +246,6 @@ def collections(request):
         year = request.session.get('year')
         brand = request.session.get('brand')
         transmission = request.session.get('transmission')
-
-        print(budget)
-        print(year)
-        print(brand)
-        print(transmission)
 
         budget_ranges = {
             '0-10': (0, 1000000),
@@ -263,7 +291,6 @@ def collections(request):
 
 
 # Sell Your Car
-@login_required
 def sell_a_car(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -305,6 +332,7 @@ def sell_a_car(request):
         }
         return render(request, 'sell_a_car.html', context)
     else:
+        request.session['sell_car_key'] = 'sell_a_car'
         return redirect('login')
 
 
@@ -344,17 +372,17 @@ def about_us(request):
 
 #car details 
 def car_details(request, id):
-    cars = Cars.objects.get(id=int(id))
-    image_list = Car_Image.objects.filter(car__id=cars.id).all()
-    car_price = cars.price
-    similar_cars = Cars.objects.filter(price__gte=car_price)
-    
-    context={
-        'cars':cars,
-        'car_images':image_list,
-        'similar_cars':similar_cars,
-        }
-    return render(request, 'car_details.html', context)
+        cars = Cars.objects.get(id=int(id))
+        image_list = Car_Image.objects.filter(car__id=cars.id).all()
+        car_price = cars.price
+        similar_cars = Cars.objects.filter(price__gte=car_price)
+        
+        context={
+            'cars':cars,
+            'car_images':image_list,
+            'similar_cars':similar_cars,
+            }
+        return render(request, 'car_details.html', context)
 
 
 #emi 
@@ -363,7 +391,6 @@ def emi(request):
 
 
 from urllib.parse import urlencode
-
 def filter(request):
     brands = Brand.objects.all().distinct()
     transmissions = Transmission.objects.all().distinct()
@@ -374,6 +401,7 @@ def filter(request):
         'transmission_types': transmissions,
         'years': sorted(years, reverse=True),
     })
+
 
 
 # from django.urls import reverse

@@ -119,13 +119,9 @@ class Career(models.Model):
 
 # ========================== Happines Club ============================
 class HappinessClub(models.Model):
-    owner_name = models.CharField(max_length=100)
     owner_image = models.ImageField(upload_to='happiness_club/', blank=True,)
-    owner_info = models.CharField(max_length=100)
     testimonial = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.owner_name
     
 
 

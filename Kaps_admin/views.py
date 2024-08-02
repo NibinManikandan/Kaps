@@ -389,16 +389,12 @@ def dele_notification(request,i, id):
 @user_passes_test(lambda u: u.is_superuser, login_url='Kaps_admin')
 def add_happy_club(request):
     if request.method == 'POST':
-        owner_name = request.POST.get('name')
         images = request.FILES.get('images')
-        owner_info = request.POST.get('info')
         testimonial = request.POST.get('testimonial')
         
 
         happiness_obj = HappinessClub(
-            owner_name=owner_name,
             owner_image=images,
-            owner_info=owner_info,
             testimonial=testimonial
         )
 

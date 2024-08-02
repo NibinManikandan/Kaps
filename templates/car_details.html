@@ -24,22 +24,110 @@
       #carouselExampleIndicators {
         margin: 60px;
       }
-      .details {
-        margin-left: 35px;
-      }
-      .test-drive-btn,
-      .book-now-btn {
-        padding: 20px 40px;
-        background-color: #2e7d6b;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1em;
-        flex: 1;
-        margin: 0 5px;
+      .details{
+          margin-left: 35px;
       }
     }
+
+    .test-drive-btn, .book-now-btn {
+      padding: 20px;
+      position: relative;
+      background-color: #2e7d6b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      flex: 1;
+      margin: 0 5px;
+  }
+  
+  .car-info .buttons {
+      display: flex;
+      gap: 10px; /* Space between buttons */
+      margin-top: 20px;
+      width: 100%; /* Make sure buttons take up the full width */
+      justify-content: start; /* Align items at the start */
+  }
+  
+  .car-info .buttons button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      font-size: 16px;
+      cursor: pointer;
+      flex: 1; /* Ensure buttons take equal space */
+      max-width: none; /* Ensure buttons do not have a max width */
+  }
+  
+  .car-info .test-drive-btn {
+      background-color: white;
+      color: #2e7d6b;
+      border: 1px solid #2e7d6b;
+      border-radius: 4px;
+  }
+  
+  .car-info .book-now-btn {
+      background-color: #2e7d6b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+  }
+  
+  .car-info .buttons img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
+  }
+
+    @media (max-width: 500px) {
+      .buttons-container {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: #ffffff;
+          box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+          padding: 10px 0;
+          display: flex;
+          flex-direction: row; /* Ensure buttons are in a row */
+          justify-content: space-between;
+          align-items: center;
+          z-index: 1000;
+      }
+  
+      .button-link {
+          flex: 1; /* Allow buttons to take equal space */
+          text-align: center; /* Center the text */
+      }
+  
+      .test-drive-btn, .book-now-btn {
+          width: 100%; /* Ensure buttons take full width */
+          padding: 15px 0; /* Adjust padding for better touch targets */
+          font-size: 1em; /* Maintain consistent font size */
+          border: none; /* Remove border for cleaner look */
+          border-radius: 0; /* Remove border radius for full width buttons */
+      }
+  
+      .test-drive-btn {
+          background-color: white;
+          color: #2e7d6b;
+          border-right: 1px solid #ddd; /* Border between buttons */
+      }
+  
+      .book-now-btn {
+          background-color: #2e7d6b;
+          color: white;
+      }
+  
+      .button-icon {
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
+      }
+  }
     
     /* Mobile and iPad views */
     @media (max-width: 1024px) {
@@ -93,83 +181,7 @@
       font-weight: bold;
       color: #2e7d6b;
     }
-    
-    .car-info .buttons {
-      display: flex;
-      gap: 10px; /* Space between buttons */
-      margin-top: 20px;
-      width: 25%; /* Adjust width to auto for better responsiveness */
-    }
-    
-    .car-info .buttons button {
-      display: flex;
-      align-items: center;
-      padding: 8px 12px;
-      font-size: 16px;
-      cursor: pointer;
-      width: auto; /* Button width based on content */
-    }
-    
-    .car-info .test-drive-btn {
-      background-color: white;
-      color: #2e7d6b;
-      border: 1px solid #2e7d6b;
-      border-radius: 4px;
-    }
-    
-    .car-info .book-now-btn {
-      background-color: #2e7d6b;
-      color: white;
-      border: none;
-      border-radius: 4px;
-    }
-    
-    .car-info .buttons img {
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-    
-    @media (max-width: 768px) {
-      .car-info .buttons {
-        display: flex; /* Ensure buttons are in a flex container */
-        justify-content: space-between; /* Space between buttons */
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: #ffffff;
-        border-top: 1px solid #ddd;
-        z-index: 1000;
-        padding: 10px 0; /* Padding for better touch targets */
-        flex-direction: row; /* Ensure buttons are in a row */
-      }
-    
-      .car-info .buttons button {
-        flex: 1 1 auto; /* Allow buttons to take equal space without stretching end to end */
-        text-align: center; /* Center the text */
-        max-width: none; /* Ensure buttons do not have a max width */
-      }
-    
-      .car-info .buttons button + button {
-        border-left: 1px solid #ddd; /* Border between buttons */
-      }
-      .car-overview {
-        padding: 0px;
-      }
-      .inspection-report {
-        padding: 0px;
-      }
-      .benefits {
-        padding: 0px;
-      }
-      .inspection-report .report-table td,
-      span {
-        font-size: 12px;
-      }
-    }
-    
+
     /*Similar car*/
     
     .showcase-section {
@@ -246,7 +258,7 @@
         flex-direction: column;
       }
       .report-table {
-        margin: 0px;
+        margin-right: 0px;
       }
     
       .report-buttons a {
@@ -300,14 +312,21 @@
       <p class="inspection" style="font-weight: 700;">
         Kaps Certified inspection rating: <span>{{ cars.inspection_rating }}/10</span>
       </p>
-      <div class="buttons mt-4">
-        <a href="{% url "test_drive" cars.id %}" style="text-decoration: none;">
-          <button class="test-drive-btn" style="background-color: white; color: #2e7d6b; border: 1px solid #2e7d6b; border-radius: 4px; width: auto;"><img src="{% static 'images/test.svg' %}" alt="Test Drive" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" / onclick="testDriveAlert()">Test Drive</button>
+      <div class="buttons-container mt-4">
+        <a href="{% url 'test_drive' cars.id %}" class="button-link">
+            <button class="test-drive-btn">
+                <img src="{% static 'images/test.svg' %}" alt="Test Drive" class="button-icon" />
+                Test Drive
+            </button>
         </a>
-        <a href="{% url "book_now" cars.id %}" style="text-decoration: none;">
-          <button class="book-now-btn" onclick="bookNowAlert()"><img src="{% static 'images/booknow.svg' %}" alt="Book Now" style="width: 20px; height: 20px; margin-right: 8px;" />Book Now</button>
+        <a href="{% url 'book_now' cars.id %}" class="button-link">
+            <button class="book-now-btn">
+                <img src="{% static 'images/booknow.svg' %}" alt="Book Now" class="button-icon" />
+                Book Now
+            </button>
         </a>
       </div>
+
     </div>
 
     {% if messages %}
@@ -483,9 +502,11 @@
       <div class="image-carousel" id="imageCarousel">
         {% for cars in similar_cars %}
         <div class="carousel-slide">
-          <img src="{{ cars.images.first.Car_image.url }}" alt="cars" />
-          <h3>{{cars.model_name}}</h3>
-          <p>&#8377; {{cars.price}}</p>
+          <a style="text-decoration: none; color: #000;" href="{% url 'car_details' cars.id %}">
+            <img src="{{ cars.images.first.Car_image.url }}" alt="cars" />
+            <h3>{{cars.model_name}}</h3>
+            <p>&#8377; {{cars.price}}</p>
+          </a>
         </div>
         {% endfor %}
       </div>

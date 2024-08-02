@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     #index
     path('', views.home, name='home'),
+    path('futured_cars/<str:id>/', views.futured_cars, name='futured_car'),
 
     #products -car
     path('collections/', views.collections, name='collections'),

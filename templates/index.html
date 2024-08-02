@@ -73,6 +73,9 @@
       }
 
     /*----------- gallery -------------*/
+    .kaps-h2{
+        margin-left: 55px;
+    }
     .gallery {
         display: grid;
         grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
@@ -160,6 +163,7 @@
             margin: 5px; /* Reduced margin */
             width: 100%; /* Full width */
             margin-top: 60px;
+            padding: 0px 10px;
         }
     
         .kaps-assured h2 {
@@ -279,6 +283,9 @@
         margin-bottom: 15px;
         font-weight: 500;
     }
+    .emi {
+        margin-left: 20px;
+    }
 
     .emi-button-link {
         text-decoration: none;
@@ -316,6 +323,10 @@
 .showcase-section {
       padding: 5px;
       text-align: start;
+    }
+
+    .show-h2{
+        margin-left: 20px;
     }
 
     .image-carousel-wrapper {
@@ -397,7 +408,7 @@
         font-size: 2.2rem;
       }
       .landing-container {
-        height: 100vh;
+        height: 80vh;
       }
     }
 
@@ -639,7 +650,7 @@
 <!--Caps Assured Section-->
 
 <section class="kaps-assured">
-    <h2>KAPS Assured</h2>
+    <h2 class="kaps-h2">KAPS Assured</h2>
     <div class="gallery">
         <div class="image-container image-1">
             <img src="https://img.freepik.com/free-photo/two-stylish-woman-car-salon_1157-20530.jpg?ga=GA1.1.1712686685.1721378444&semt=ais_user" alt="Image" />
@@ -664,17 +675,19 @@
     </div>
 </section>
 
-<!----------- Featured Cars ------------->
+<!--showcase-->
 <div class="showcase-section ms-4">
-    <h2 style="text-align:start; ">Featured cars</h2>
-
+    <h2 class="show-h2" style="text-align:start; ">Featured cars</h2>
+    
     <div class="image-carousel" id="imageCarousel">
         {% for car in futured_cars %}
-        <div class="carousel-slide">
-            <img src="{{ car.images.first.Car_image.url }}" alt="Kia Seltos" />
-            <h3 style="margin-top: 20px;">{{car.model_name}}</h3>
-            <p>&#8377; {{car.price}}</p>
-        </div>
+            <div class="carousel-slide">
+                <a style="text-decoration: none; color: #000;" href="{% url 'car_details' car.id %}">
+                    <img src="{{ car.images.first.Car_image.url }}" alt="cars" />
+                    <h3 style="margin-top: 20px;">{{car.model_name}}</h3>
+                    <p>&#8377; {{car.price}}</p>
+                </a>
+            </div>
       {% endfor %}
     </div>
 </div>

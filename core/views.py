@@ -417,7 +417,7 @@ def test_drive(request,id):
             messages.error(request, 'You have already given submission for Test drive.')
             
             return redirect(f'../car_details/{id}/')
-        return render(request, 'test-drive.html')
+        return render(request, 'proposal_success.html')
     else:
         return render(request, 'login.html')
 
@@ -436,7 +436,7 @@ def book_now(request,id):
             
             return redirect(f'../car_details/{id}/')
 
-        return render(request, 'book_now.html')
+        return render(request, 'proposal_success.html')
     else:
         return render(request, 'login.html')
 

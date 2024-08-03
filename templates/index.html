@@ -743,14 +743,13 @@
 <script>
     // --------------- contact & whatsapp button ----------------
     document.querySelector('.contact-btn').addEventListener('click', function() {
-    window.location.href = 'tel:+ 9895769044';
+    window.location.href = 'tel:+ 9895';
   });
 
   document.querySelector('.chat-btn').addEventListener('click', function() {
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    var whatsappUrl = isMobile ? 'https://wa.me/ 9895769044' : 'https://web.whatsapp.com/send?phone= 9895769044';
-    window.open(whatsappUrl, '_blank');
-  });
+    var whatsappBusinessUrl = 'https://whatsapp.com/biz/your-business-id'; // Replace with your actual business link
+    window.open(whatsappBusinessUrl, '_blank');
+});
 
     // ------------ changing carousel content& image ----------------
     document.addEventListener('DOMContentLoaded', (event) => {

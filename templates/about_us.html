@@ -9,7 +9,7 @@
 <style>
   /* Custom Styles */
     .component-container{
-    padding: 30px 130px;
+    padding: 30px 45px;
     }
     .hero-about {
     height: 85vh; /* Make the section take up 80% of the viewport height */
@@ -49,7 +49,7 @@
 
     @media screen and (max-width: 768px) {
       .component-container {
-        padding: 20px 35px; 
+        padding: 20px 10px; 
       }
       
       .text-content h1 {
@@ -74,6 +74,17 @@
       background: linear-gradient(to right, #104545, #347974); /* Gradient background */
       }
     }
+
+    @media (max-width = 500px){
+      .custom-section img {
+        width: 100%;
+        max-width: 600px;
+        height: 290px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    }
   
   .custom-section {
     margin: 30px 0;
@@ -88,6 +99,8 @@
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 18px;
   }
 
   .custom-section h2 {
@@ -247,7 +260,7 @@
 
     .kaps-custom-button {
         color: #347974;
-        border: 2px solid #347974;
+        border: 1px solid #2a7464;
         padding: 8px 16px;
         border-radius: 4px;
         display: inline-block;
@@ -440,7 +453,7 @@ a:hover {
     @media (max-width: 480px) {
         .rounded-image {
             border-radius: 10px;
-            height: 280px;
+            height: 215px;
             margin-bottom: 10px;
 
         }
@@ -457,13 +470,18 @@ a:hover {
             margin-bottom: -30px;
             margin-left: 15px;
         }
+        .custom-section-content{
+          padding: 15px;
+        }
+
+        .col-lg-6 {
+          padding: 10px;
+        }
     }
 /* Ensures proper alignment for images */
 img.w-100 {
     display: block; /* Ensure images take full width */
 }
-
-
   
 </style>
 
@@ -539,37 +557,6 @@ img.w-100 {
     
   </div>
 </div>
-
-<!-- Container for the row -->
-<!-- <div class="component-container pb-5 mb-0 bg-primary">
-
-  <div class="row mb-5 bg-info">
-    <div class="col-md-5 d-flex align-items-center mb-3 mb-md-0 order-md-0 img-container ps-0 pe-md-5 pe-0">
-      <img src="{% static 'images/Kaps-2929.jpg' %}" alt="Happy Customers" class="img-fluid">
-    </div>
-    <div class="col-md-7 d-flex align-items-center order-md-1 content-container pe-0 bg-success">
-      <div>
-        <h3>Team KAPS</h3>
-        <p>Our team is the driving force behind Kaps Cars. Every member of our team deeply believes in the values and vision that Kaps Cars represents. It’s a perfect alignment of mission, vision, and a highly motivated team, all of whom recognize that each customer’s needs and aspirations are unique.
-        <p> </p>
-      </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row bg-info d-flex justify-content-between ">
-    <div class="col-md-7 d-flex  align-items-center mb-3 mb-md-0 order-md-0 content-container pe-5 bg-success">
-      <div>
-        <h3>Our Premium Experience</h3>
-        <p>At Kaps Cars, we pride ourselves on delivering a seamless, personalized customer service experience. From the moment you walk into our showroom to the finalization of your purchase, our dedicated team ensures a welcoming atmosphere with expert, tailored advice.</p>
-      </div>
-    </div>
-    <div class="col-md-5 d-flex align-items-center order-md-1 img-container  pe-0 ps-md-5 ps-0">
-      <img src="{% static 'images/Kaps-2929.jpg' %}" alt="Happy Customers" class="img-fluid">
-    </div>
-  </div>
-</div> 
--->
 
 
 <!-- about teams & user experience -->

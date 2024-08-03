@@ -124,6 +124,8 @@ def otp_verification(request):
             # Debug statements to check session keys
             sell_car_key = request.session.get('sell_car_key')
             find_car_key = request.session.get('find_car_key')
+            car_details_key = request.session.get('car_details')
+            futured_car_key = request.session.get('car_details')
             
             
             
@@ -135,14 +137,11 @@ def otp_verification(request):
                 del request.session['find_car_key']
                 return redirect(find_car_key)
             
-            if 'car_details_view' in request.session and 'car_details_id' in request.session:
-                view_name = request.session['car_details_view']
-                car_id = request.session['car_details_id']
-                car_details_url = reverse(view_name, kwargs={'id': car_id})
-                del request.session['car_details_view']
-                del request.session['car_details_id']
-
-                return redirect(car_details_url)
+            if car_details_key:
+                return redirect(car_details_key)
+            
+            if futured_car_key:
+                return redirect(futured_car_key)
             
             return redirect('home')
         else:
@@ -166,8 +165,12 @@ def home(request):
 
 
 def futured_cars(request, id):
+    if request.user.is_authenticated:    
         cars = Cars.objects.get(id=int(id))
         return render(request, 'car_details.html', {'cars':cars})
+    else:
+        request.session['car_details'] = request.path
+        return redirect('login')
     
 
 
@@ -372,6 +375,7 @@ def about_us(request):
 
 #car details 
 def car_details(request, id):
+    if request.user.is_authenticated:
         cars = Cars.objects.get(id=int(id))
         image_list = Car_Image.objects.filter(car__id=cars.id).all()
         car_price = cars.price
@@ -383,6 +387,9 @@ def car_details(request, id):
             'similar_cars':similar_cars,
             }
         return render(request, 'car_details.html', context)
+    else:
+        request.session['car_details'] = request.path
+        return redirect('login')
 
 
 #emi 
@@ -407,38 +414,34 @@ def filter(request):
 # from django.urls import reverse
 @login_required
 def test_drive(request,id):
-    if request.user.is_authenticated:
-        cars = Cars.objects.get(id=id)
-        user_obj = UserLogin.objects.get(email=request.user.email)
-        if not Test_drive.objects.filter(car_data=cars,user_data =user_obj).exists():
-            test_drive_obj = Test_drive(user_data=user_obj,car_data=cars)
-            test_drive_obj.save()
-        else:
-            messages.error(request, 'You have already given submission for Test drive.')
-            
-            return redirect(f'../car_details/{id}/')
-        return render(request, 'proposal_success.html')
+    cars = Cars.objects.get(id=id)
+    user_obj = UserLogin.objects.get(email=request.user.email)
+    if not Test_drive.objects.filter(car_data=cars,user_data =user_obj).exists():
+        test_drive_obj = Test_drive(user_data=user_obj,car_data=cars)
+        test_drive_obj.save()
     else:
-        return render(request, 'login.html')
+        messages.error(request, 'You have already given submission for Test drive.')
+        
+        return redirect(f'../car_details/{id}/')
+    return render(request, 'proposal_success.html')
+
 
 
 
 @login_required
 def book_now(request,id):
-    if request.user.is_authenticated:
-        cars = Cars.objects.get(id=id)
-        user_obj = UserLogin.objects.get(email=request.user.email)
-        if not Book_now.objects.filter(car_data=cars,user_data =user_obj).exists():
-            test_drive_obj = Book_now(user_data=user_obj,car_data=cars)
-            test_drive_obj.save()
-        else:
-            messages.error(request, 'You have already given submission for Booking.')
-            
-            return redirect(f'../car_details/{id}/')
-
-        return render(request, 'proposal_success.html')
+    cars = Cars.objects.get(id=id)
+    user_obj = UserLogin.objects.get(email=request.user.email)
+    if not Book_now.objects.filter(car_data=cars,user_data =user_obj).exists():
+        test_drive_obj = Book_now(user_data=user_obj,car_data=cars)
+        test_drive_obj.save()
     else:
-        return render(request, 'login.html')
+        messages.error(request, 'You have already given submission for Booking.')
+        
+        return redirect(f'../car_details/{id}/')
+
+    return render(request, 'proposal_success.html')
+    
 
 
 

@@ -174,7 +174,6 @@ def futured_cars(request, id):
     
 
 
-
 # find Your Car Form Submission
 def find_a_car(request):
     if request.user.is_authenticated:
@@ -361,7 +360,6 @@ def careers(request):
 
     
 
-
 #kaps assured 
 def kaps_assured(request):
     return render(request, 'kaps_assured.html')
@@ -442,7 +440,6 @@ def book_now(request,id):
 
     return render(request, 'proposal_success.html')
     
-
 
 
 

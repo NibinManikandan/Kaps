@@ -76,6 +76,7 @@
     .kaps-h2{
         margin-left: 55px;
     }
+    
     .gallery {
         display: grid;
         grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
@@ -101,19 +102,15 @@
     }
     
     .image-link {
+        font-family: Helvetica, sans-serif;
         position: absolute;
         bottom: 10px;
         left: 10px;
         color: white;
-        background-color: rgba(0, 0, 0, 0.7);
         padding: 5px 10px;
         border-radius: 5px;
         text-decoration: none;
-        font-size: 1em;
-    }
-    
-    .image-link:hover {
-        background-color: rgba(0, 0, 0, 0.9);
+        font-size: 3em;
     }
     
     .link-first {
@@ -153,8 +150,37 @@
         margin-bottom: 40px;
     }
     
+    .image-link.link-first {
+        line-height: 1.5; /* Adjust the line height to control space between lines */
+    }
+
+    .image-link.link-three .gal-3{
+        font-size: 1.8rem;
+    }
+
+    .image-link.link-four .gal-4{
+        font-size: 1.8rem;
+    }
+
+    .image-link.link-five .gal-5{
+        font-size: 1.8rem;
+    }
+    
+    
     /* Mobile View */
     @media (max-width: 768px) {
+        .image-link.link-three .gal-3{
+            font-size: .9rem;
+        }
+    
+        .image-link.link-four .gal-4{
+            font-size: .9rem;
+        }
+    
+        .image-link.link-five .gal-5{
+            font-size: .9rem;
+        }
+        
         .gallery {
             display: grid;
             grid-template-columns: 1fr 1fr; /* Two columns layout for mobile view */
@@ -165,7 +191,14 @@
             margin-top: 60px;
             padding: 0px 10px;
         }
-    
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        /* Removed the transition property */
+        }
+
         .kaps-assured h2 {
             margin-bottom: -35px;
             margin-left: 10px;
@@ -218,13 +251,53 @@
         }
     
         .image-link {
+            font-family: Arial, Helvetica, sans-serif;
             position: absolute;
             color: white;
-            background-color: rgba(0, 0, 0, 0.7);
             padding: 5px 10px;
             border-radius: 5px;
             text-decoration: none;
-            font-size: .8em;
+            font-size: 1.5em;
+            text-align: start;
+            margin-bottom: 0;
+
+        }
+    }
+
+    @media (max-width:500px){
+        .image-container.image-1 {
+            grid-column: 1 / 2; /* First column */
+            grid-row: 1 / 3; /* Spanning two rows */
+            height: 40vh; /* Full viewport height */
+        }
+    
+        .image-container.image-2,
+        .image-container.image-3 {
+            grid-column: 2 / 3; /* Second column */
+            height: 19.3vh; /* Half of the viewport height */
+        }
+    
+        .image-container.image-2 {
+            grid-row: 1 / 2; /* First row */
+        }
+    
+        .image-container.image-3 {
+            grid-row: 2 / 3; /* Second row */
+        }
+    
+        .image-container.image-4,
+        .image-container.image-5 {
+            grid-column: span 1; /* Span one column */
+            grid-row: auto; /* Auto rows */
+            height: 20vh; /* Adjustable height for the fourth and fifth images */
+        }
+    
+        .image-container.image-4 {
+            grid-row: 3 / 4; /* Third row */
+        }
+    
+        .image-container.image-5 {
+            grid-row: 3 / 4; /* Third row */
         }
     }
 
@@ -423,55 +496,7 @@
       opacity: 0.5;
       padding: 15px 40px
     }
-
-    @media (max-width: 480px) {
-      .find-car-container {
-        padding: 20px;
-        width: 95%;
-        background: #347974; /* Gradient background for very small screens */
-        border-radius: 10px; /* Increased rounded corners */
-      }
-    }
     
-    .find-car-section h2{
-        font-weight: 500;
-    }
-    .find-car-section .find-car-btn:hover{
-        background-color: #f8f9fa;
-        color: #086761;
-
-    }
-    .find-car-section p{
-        font-weight: 400;
-    }
-
-    @media (min-width: 1024px) {
-      .find-car-section {
-        padding: 60px;
-      }
-
-      .find-car-container {
-        padding: 70px;
-        width: 100%; /* Adjusted width */
-        max-width: 1155px; /* Increased max-width */
-        background: #347974; /* Gradient background for large screens */
-        border-radius: 10px;
-      }
-
-    }
-
-    .find-car-container {
-      text-align: start;
-      padding: 90px;
-      background: #347974; /* Background color */
-      border-radius: 20px; /* Rounded corners */
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-      color: #fff;
-      font-size: 1.5em;
-      width: 100%; /* Container width */
-      max-width: 1280px; /* Max container width */
-      margin: 0 auto; /* Center horizontally */
-    }
 
     .emi{
         margin-left: 25px;
@@ -483,24 +508,7 @@
         }
     }
 
-    @media (max-width: 768px) {
-      .find-car-section {
-        padding: 10px;
-      }
-
-      .find-car-section {
-        padding: 10px;
-      }
-
-      .find-car-container {
-        padding: 20px;
-        width: 100%;
-        background: #347974; /* Gradient background for small screens */
-        border-radius: 10px; /* Increased rounded corners */
-        max-width: 1280px;
-        font-size: 1.2em;
-      }
-    }
+    
 
     .dream-car-section {
       text-align: start;
@@ -518,6 +526,19 @@
         gap: 20px;
         font-weight: 500;
     }
+    @media (max-width : 500px) {
+        .dream-car-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .dream-car-buttons button {
+            min-width: 100px; /* Minimum width to accommodate the longest text */
+            
+        }
+    }
 
     @media (max-width: 768px){
         .dream-car-section {
@@ -527,9 +548,10 @@
         font-size: 0.8em;
         margin-left: 0px;
     }
+    
     .dream-car-buttons button {
         width: calc(100% - 0px); /* Full width minus side margins */
-        max-width: 300px; /* Maximum width for buttons */
+        max-width: 400px; /* Maximum width for buttons */
         border-radius: 5px;
         cursor: pointer;
         font-size: 1.2em;
@@ -555,20 +577,11 @@
 }
 
 
-.dream-car-buttons {
-    display: flex;
-    flex-direction: row; /* Place buttons in a row */
-    align-items: center; /* Center buttons horizontally */
-    gap: 10px; /* Spacing between buttons */
-    margin-bottom: 30px;
-}
-
 .dream-car-buttons button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
     padding: 20px;
-    min-width: 60px; /* Minimum width to accommodate the longest text */
     box-sizing: border-box; /* Include padding in width */
     white-space: nowrap; /* Prevent text from wrapping */
 }
@@ -604,28 +617,140 @@
     }
 }
 
+/*find car */
 
+.find-car-section {
+    position: relative;
+    height: 85vh; /* Adjust the height as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.find-car-container {
+    position: relative;
+    z-index: 1; /* Ensure the text content is above the background image */
+    padding: 90px;
+    color: #fff; /* Set text color */
+    font-size: 1.5em;
+    width: 100%; /* Container width */
+    max-width: 1380px; /* Max container width */
+    margin: 0 auto; /* Center horizontally */
+    text-align: start; /* Left align text */
+    background: url("{% static 'images/find.jpg' %}") no-repeat center center; /* Image background */
+    background-size: cover; /* Ensure the image covers the entire container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.find-car-btn {
+    background-color: #fff;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.find-car-btn:hover {
+    background-color: #f8f9fa;
+    color: #086761;
+}
+
+.find-car-section h2 {
+    font-weight: 500;
+}
+
+.find-car-section p {
+    font-weight: 400;
+}
 
 @media (max-width: 768px) {
-    .dream-car-buttons {
-        flex-direction: column; /* Stack buttons vertically for mobile view */
-        align-items: center; /* Center buttons horizontally */
-        margin: 25px 10px; /* Add margin to the container for left and right spacing */
+    .find-car-section {
+        padding: 10px;
     }
-    .dream-car-buttons button {
-        width: 100%; /* Full width */
-        max-width: calc(100% - 20px); /* Subtract margin from full width */
-        text-align: center; /* Center the text */
-    }
-    .contact-btn, .chat-btn {
-        padding: 20px 10px; /* Adjust padding to ensure single line text */
+
+    .find-car-container {
+        padding: 20px;
+        font-size: 1.2em;
     }
 }
+
+@media (max-width: 480px) {
+    .find-car-container {
+        padding: 20px;
+        width: 95%;
+        font-size: 1em;
+    }
+    .find-car-section {
+        position: relative;
+        height: 35vh;
+    }
+}
+
+.landing-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.landing-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    display: none;
+}
+
+.landing-container video.active {
+    display: block;
+}
+
+.landing-content {
+    color: white;
+    margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+.custom-heading {
+    font-size: 2.5em;
+}
+
+.highlight {
+    color: yellow;
+}
+
+.landing-buttons {
+    margin-top: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #333;
+    border-radius: 5px;
+}
+
 
 </style>
 
 <!-- Carousel Section -->
 <div class="landing-container" id="landing-container">
+    <video id="video-desktop" src="{% static 'videos/banner-video-1020px.mp4' %}" type="video/mp4" autoplay muted loop></video>
+    <video id="video-tablet" src="{% static 'videos/mobile-banner-video.mp4' %}" type="video/mp4" autoplay muted loop></video>
+    <video id="video-mobile" src="{% static 'videos/mobile-banner-video.mp4' %}" type="video/mp4" autoplay muted loop></video>
     <div class="landing-background">
         <div class="landing-content">
             <h1 class="custom-heading ">
@@ -638,11 +763,6 @@
                 <a href="{% url 'collections' %}" class="button explore">Explore collections</a>
                 <a href="{% url 'sell_a_car' %}" class="button sell">Sell your car</a>
             </div>
-            <div class="carousel-indicators">
-                <span class="dot" onclick="changeBackground(0)"></span>
-                <span class="dot" onclick="changeBackground(1)"></span>
-                <span class="dot" onclick="changeBackground(2)"></span>
-            </div>
         </div>
     </div>
 </div>
@@ -654,32 +774,32 @@
     <div class="gallery">
         <div class="image-container image-1">
             <a href="kaps_assured/#certified_inspection">
-                <img src="https://img.freepik.com/free-photo/two-stylish-woman-car-salon_1157-20530.jpg?ga=GA1.1.1712686685.1721378444&semt=ais_user" alt="Image" />
-                <p class="image-link link-first">Kaps certified inspection</p>
+                <img src="{% static 'images/gallery-1.jpg' %}" alt="Image" />
+                <p class="image-link link-first" style="line-height: 1;">Kaps <br> <span style="font-weight: bold;">certified <br> inspection </span></p>
             </a>
         </div>
         <div class="image-container image-2">
             <a href="kaps_assured/#warrenty">
-                <img src="https://img.freepik.com/free-photo/young-handsome-business-man-choosing-car-car-showroom_1303-17897.jpg?t=st=1721383241~exp=1721386841~hmac=5ab5ff3e3d1994a1a9ea5cc68ed19a4b8df17fdd66aed427db0240d0c3ad4d4e&w=1060" alt="Image" />
-                <p class="image-link">Kaps warranty</p>
+                <img src="{% static 'images/gallery-2.jpg' %}" alt="Image" />
+                <p class="image-link link-two" style="line-height: 1;">Kaps <br> Warranty</p>
             </a>
         </div>
         <div class="image-container image-3">
             <a href="kaps_assured/#exchange">
-                <img src="https://img.freepik.com/free-photo/young-handsome-business-man-choosing-car-car-showroom_1303-17897.jpg?t=st=1721383241~exp=1721386841~hmac=5ab5ff3e3d1994a1a9ea5cc68ed19a4b8df17fdd66aed427db0240d0c3ad4d4e&w=1060" alt="Image" />
-                <p class="image-link">Exchange assurance</p>
+                <img src="{% static 'images/gallery-3.jpg' %}" alt="Image" />
+                <p class="image-link link-three" style="line-height: .6;"><span style="font-weight: bold;">Exchange</span> <br> <span class="gal-3">assurance</span></p>
             </a>
         </div>
         <div class="image-container image-4">
             <a href="kaps_assured/#buyback">
-                <img src="https://img.freepik.com/free-photo/young-handsome-business-man-choosing-car-car-showroom_1303-17897.jpg?t=st=1721383241~exp=1721386841~hmac=5ab5ff3e3d1994a1a9ea5cc68ed19a4b8df17fdd66aed427db0240d0c3ad4d4e&w=1060" alt="Image" />
-                <p class="image-link">Buyback assurance</p>
+                <img src="{% static 'images/gallery-5.jpg' %}" alt="Image" />
+                <p class="image-link link-four" style="line-height: .8;"><span style="font-weight: bold;">Buy back</span> <br> <span class="gal-4">assurance</span></p>
             </a>
         </div>
         <div class="image-container image-5">
             <a href="kaps_assured/#loan">
-                <img src="https://img.freepik.com/free-photo/young-handsome-business-man-choosing-car-car-showroom_1303-17897.jpg?t=st=1721383241~exp=1721386841~hmac=5ab5ff3e3d1994a1a9ea5cc68ed19a4b8df17fdd66aed427db0240d0c3ad4d4e&w=1060" alt="Image" />
-                <p class="image-link">Esy loan option</p>
+                <img src="{% static 'images/gallery-4.jpg' %}" alt="Image" />
+                <p class="image-link link-five" style="line-height: 1;"><span class="gal-5">loan</span> <br><span style="font-weight: bold;">Easy</span></p>
             </a>
         </div>
     </div>
@@ -720,11 +840,13 @@
 
 <section class="find-car-section">
     <div class="find-car-container">
-      <h2 style="text-align: start;">Find the perfect car for you</h2>
-      <p style="text-align: start;">Answer few questions to find a car that is perfect for you</p>
-      <a href="{% url 'find_a_car' %}" style="text-decoration: none;font-weight: 500;"><button class="find-car-btn">Find car</button></a>
+        <h2>Find the perfect car for you</h2>
+        <p>Answer a few questions to find a car that is perfect for you</p>
+        <a href="{% url 'find_a_car' %}" style="text-decoration: none; font-weight: 500;">
+            <button class="find-car-btn">Find car</button>
+        </a>
     </div>
-  </section>
+</section>
 
   <!-- Want to get your dream car from us? section -->
   <section class="dream-car-section ">
@@ -743,7 +865,7 @@
 <script>
     // --------------- contact & whatsapp button ----------------
     document.querySelector('.contact-btn').addEventListener('click', function() {
-    window.location.href = 'tel:+ 9895';
+    window.location.href = 'tel:+ 9895769044';
   });
 
   document.querySelector('.chat-btn').addEventListener('click', function() {
@@ -752,55 +874,90 @@
 });
 
     // ------------ changing carousel content& image ----------------
+    
     document.addEventListener('DOMContentLoaded', (event) => {
         const words = ['trust', 'confidence', 'safety'];
         let wordIndex = 0;
-        const backgroundImages = [
-            "{% static 'images/index_1.jpg' %}",
-            "{% static 'images/index_2.jpg' %}",
-            "{% static 'images/index_3.jpg' %}"
-        ];
-        let currentIndex = 0;
-
-        function changeContent() {
-            changeWord();
-            changeBackground(currentIndex);
-            currentIndex = (currentIndex + 1) % backgroundImages.length;
-        }
-
+    
         function changeWord() {
             const dynamicText = document.getElementById('dynamic-text');
             dynamicText.textContent = words[wordIndex];
             wordIndex = (wordIndex + 1) % words.length;
         }
-
-        function changeBackground(index) {
-            const landingContainer = document.getElementById('landing-container');
-            landingContainer.style.backgroundImage = `url(${backgroundImages[index]})`;
-            updateDots(index);
-        }
-
-        function updateDots(activeIndex) {
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.remove('active');
-                if (index === activeIndex) {
-                    dot.classList.add('active');
-                }
+    
+        function updateVideo() {
+            const videos = document.querySelectorAll('.landing-container video');
+            const windowWidth = window.innerWidth;
+    
+            videos.forEach(video => {
+                video.classList.remove('active');
+                video.pause();  // Pause all videos
             });
+    
+            if (windowWidth >= 1024) {
+                const desktopVideo = document.getElementById('video-desktop');
+                desktopVideo.classList.add('active');
+                desktopVideo.play();  // Play only the active video
+            } else if (windowWidth >= 768) {
+                const tabletVideo = document.getElementById('video-tablet');
+                tabletVideo.classList.add('active');
+                tabletVideo.play();  // Play only the active video
+            } else {
+                const mobileVideo = document.getElementById('video-mobile');
+                mobileVideo.classList.add('active');
+                mobileVideo.play();  // Play only the active video
+            }
         }
-
-        setInterval(changeContent, 2000); // Change content every 2 seconds
-
-        // Initialize with the first background image and active dot
-        changeContent();
-        updateDots(0);
-
-        window.changeBackground = (index) => {
-            currentIndex = index;
-            changeContent();
-        };
+    
+        let touchstartX = 0;
+        let touchendX = 0;
+    
+        function handleSwipeGesture() {
+            if (touchendX < touchstartX) {
+                nextSlide();
+            }
+            if (touchendX > touchstartX) {
+                previousSlide();
+            }
+        }
+    
+        function previousSlide() {
+            currentIndex = (currentIndex - 1 + words.length) % words.length;
+            changeWord();
+        }
+    
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % words.length;
+            changeWord();
+        }
+    
+        // Initialize
+        changeWord();
+        updateVideo();
+    
+        window.addEventListener('resize', updateVideo);
+    
+        const landingContainer = document.getElementById('landing-container');
+    
+        landingContainer.addEventListener('touchstart', (event) => {
+            touchstartX = event.changedTouches[0].screenX;
+        });
+    
+        landingContainer.addEventListener('touchend', (event) => {
+            touchendX = event.changedTouches[0].screenX;
+            handleSwipeGesture();
+        });
+    
+        landingContainer.addEventListener('mousedown', (event) => {
+            touchstartX = event.clientX;
+        });
+    
+        landingContainer.addEventListener('mouseup', (event) => {
+            touchendX = event.clientX;
+            handleSwipeGesture();
+        });
     });
+    
 </script>
 
 

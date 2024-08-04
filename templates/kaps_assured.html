@@ -4,6 +4,7 @@
 {% block content %}
 
 <style>
+
     @media (max-width: 768px) {
         .footer-content {
             padding: 20px;
@@ -14,6 +15,7 @@
         position: relative;
         text-align: center;
         color: white;
+        width: 100%;
     }
     
     .hero-video {
@@ -51,7 +53,7 @@
     @media (max-width: 500px) {
         .hero-video {
             display: none; /* Hide all videos */
-            width: 90%%;
+            width: 100%;
         }
     
         .mobile-video {
@@ -158,6 +160,7 @@
             border-radius: 10px;
             width: 230px;
             height: 400px;
+            object-fit: cover;
 
         }
 
@@ -326,19 +329,69 @@ img.w-100 {
 }
 
 
+/*play button */
+.video-container {
+    position: relative;
+    display: inline-block;
+}
+
+.video-thumbnail {
+    display: block;
+    border-radius: 15px; /* Adjust this value to make the image rounded */
+}
+
+.play-button-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.play-button {
+    width: 60px; /* Adjust the size of the play button */
+    height: 60px; /* Adjust the size of the play button */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-button:before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 15px solid white; /* Adjust the size and color of the play icon */
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: relative;
+    left: 3px; /* Center the play icon */
+}
+
+.play-button-overlay:hover .play-button {
+    background-color: rgba(0, 0, 0, 0.8); /* Darken background on hover */
+}
+
 </style>
 
 <div class="hero-section">
     <video class="hero-video desktop-video" autoplay muted loop>
-        <source src="{% static 'videos/banner-video-1020px.mp4' %}" type="video/mp4">
+        <source src="{% static 'videos/desk.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <video class="hero-video tablet-video" autoplay muted loop>
-        <source src="{% static 'videos/tab-banner-video.mp4' %}" type="video/mp4">
+        <source src="{% static 'videos/tab.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <video class="hero-video mobile-video" autoplay muted loop>
-        <source src="{% static 'videos/mobile-banner-video.mp4' %}" type="video/mp4">
+        <source src="{% static 'videos/mob.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <div class="hero-text text-start">
@@ -353,9 +406,14 @@ img.w-100 {
     <div id="certified_inspection" class="container my-5 py-3 mini-conatiner ">
         <div class="row no-gutters d-flex justify-content-between ">
             <div class="col-lg-5 align-items-left ">
-                <a href="https://youtu.be/jGs0pwqxBIQ?si=harPrnzExJakVfmR">
-                    <img class="w-100 shadow rounded-image" src="{% static 'images/index_3.jpg' %}" />
-                </a>
+                <div class="video-container">
+                    <a href="https://youtu.be/jGs0pwqxBIQ?si=harPrnzExJakVfmR" target="_blank">
+                        <img class="video-thumbnail w-100 shadow rounded-image" src="{% static 'images/gallery-1.jpg' %}" alt="Video Thumbnail" />
+                        <div class="play-button-overlay">
+                            <div class="play-button"></div>
+                        </div>
+                    </a>
+                </div>
             </div>
             <div class="col-lg-6 ">
                 <div class="content-container">
@@ -380,7 +438,7 @@ img.w-100 {
     <div class="container my-5  py-3 mini-conatiner " id="warrenty">
         <div class="row no-gutters d-flex justify-content-between">
             <div class="col-lg-5 order-lg-2">
-                <img class="w-100 shadow rounded-image" src="{% static 'images/index_2.jpg' %}" />
+                <img class="w-100 shadow rounded-image" src="{% static 'images/warrenty.jpg' %}" />
             </div>
             <div class="col-lg-6 order-lg-1 ">
                 <div class="content-container ">
@@ -397,7 +455,7 @@ img.w-100 {
     <div class="container my-5  py-3 mini-conatiner" id="exchange">
         <div class="row no-gutters d-flex justify-content-between ">
             <div class="col-lg-5 ">
-                <img class="w-100 shadow rounded-image " src="{% static 'images/demo_6.jpeg' %}" />
+                <img class="w-100 shadow rounded-image " src="{% static 'images/kaps-ex.jpg' %}" />
             </div>
             <div class="col-lg-6 ">
                 <div class="content-container ">
@@ -419,7 +477,7 @@ img.w-100 {
     <div class="container my-5 py-3 mini-conatiner" id="buyback">
         <div class="row no-gutters d-flex justify-content-between ">
             <div class="col-lg-5 order-lg-2">
-                <img class="w-100 shadow rounded-image" src="{% static 'images/demo_10.jpg' %}" />
+                <img class="w-100 shadow rounded-image" src="{% static 'images/about.jpg' %}" />
             </div>
             <div class="col-lg-6 order-lg-1 ">
                 <div class="content-container ">
@@ -440,7 +498,7 @@ img.w-100 {
     <div class="container my-5 py-3 mini-conatiner"  id="loan">
       <div class="row no-gutters d-flex justify-content-between ">
         <div class="col-lg-5">
-          <img class="w-100 shadow rounded-image" src="{% static 'images/demo_4.jpeg' %}" />
+          <img class="w-100 shadow rounded-image" src="{% static 'images/easy.jpg' %}" />
       </div>
          
           <div class="col-lg-6 ">

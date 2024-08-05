@@ -16,6 +16,7 @@ Django==4.2.6
 django-environ==0.11.2
 django-jazzmin==3.0.0
 djangorestframework==3.15.2
+docker==7.1.0
 executing==2.0.1
 filelock==3.12.4
 Flask==3.0.0
@@ -44,9 +45,9 @@ pure-eval==0.2.2
 Pygments==2.17.2
 python-dateutil==2.8.2
 python-decouple==3.8
-pywin32==306
 pyzmq==25.1.1
 requests==2.32.3
+setuptools==72.1.0
 six==1.16.0
 sqlparse==0.4.4
 stack-data==0.6.3

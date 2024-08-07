@@ -1,7 +1,12 @@
 /* Report Status Section */
+body, h1, h2, h3, h4, h5, h6, p, a, span, div {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500; /* Medium weight */
+}
+
 .report-status-section {
   text-align: center;
-  padding: 50px 20px;
+  padding: 145px 20px;
   background-color: #ffffff;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -21,7 +26,9 @@
 
 .report-status-container h2 {
   margin-bottom: 15px;
-  font-size: 1.5em;
+  font-size: 2em;
+  font-weight: 600;
+
 }
 
 .report-status-container p {
@@ -47,12 +54,15 @@
   background-color: #347974;
   color: white;
   border: none;
+  width: 500px;
 }
 
 .whatsapp-btn {
   background-color: white;
   color: #347974;
   border: 2px solid #347974;
+  width: 500px;
+
 }
 
 .call-btn:hover {
@@ -66,7 +76,7 @@
 
 @media (max-width: 480px) {
   .report-status-section {
-    padding: 30px 10px;
+    padding: 100px 10px;
   }
 
   .checkmark-icon {
@@ -75,7 +85,7 @@
   }
 
   .report-status-container h2 {
-    font-size: 1.2em;
+    font-size: 20px;
   }
 
   .report-status-container p {

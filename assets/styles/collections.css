@@ -1,4 +1,9 @@
 /* Car Listings Section */
+body, h1, h2, h3, h4, h5, h6, p, a, span, div {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500; /* Medium weight */
+}
+
 .car-listings-section {
   display: flex;
   max-width: 1200px;
@@ -122,21 +127,6 @@
 .car-info p {
   margin: 5px 0;
   color: #555;
-}
-
-.download-btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #2e7d6b;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 1em;
-  text-decoration: none;
-  margin-top: 10px; /* Add margin to separate from other content */
 }
 
 .download-btn:hover {
